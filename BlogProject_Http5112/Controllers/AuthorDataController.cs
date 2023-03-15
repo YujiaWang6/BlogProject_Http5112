@@ -111,7 +111,9 @@ namespace BlogProject_Http5112.Controllers
                 NewAuthor.AuthorBio = AuthorBio;
             }
 
-                return NewAuthor;
+            Conn.Close();
+
+            return NewAuthor;
         }
 
     }

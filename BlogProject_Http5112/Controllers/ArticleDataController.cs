@@ -63,7 +63,7 @@ namespace BlogProject_Http5112.Controllers
 
             MySqlCommand cmd = Conn.CreateCommand();
 
-            cmd.CommandText = "Select * from Articles";
+            cmd.CommandText = "Select * from Articles where articleid = " + id;
 
             MySqlDataReader ResultSet = cmd.ExecuteReader();
 

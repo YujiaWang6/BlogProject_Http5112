@@ -37,7 +37,7 @@ namespace BlogProject_Http5112.Controllers
 
                 string ArticleName = (string)ResultSet["articletitle"];
                 string ArticleBody = (string)ResultSet["articlebody"];
-                int ArticleId = (int)ResultSet["articleid"];
+                int ArticleId = Convert.ToInt32(ResultSet["articleid"]);
 
 
                 Article NewArticle = new Article();

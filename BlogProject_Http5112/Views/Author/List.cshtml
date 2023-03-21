@@ -9,6 +9,10 @@
 
 <div id="containerlist">
     <h2>List of Authors</h2>
+    <form action="List" method="get">
+        <input type="text" name="searchKey" />
+        <input type="submit" value="Search" />
+    </form>
     @foreach (var author in Model)
     {
         <div>

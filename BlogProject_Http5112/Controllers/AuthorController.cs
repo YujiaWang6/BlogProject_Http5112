@@ -17,11 +17,11 @@ namespace BlogProject_Http5112.Controllers
 
 
         // GET: /Author/List
-        public ActionResult List()
+        public ActionResult List(string searchKey = null)
         {
 
             AuthorDataController controller = new AuthorDataController();
-            IEnumerable<Author> Authors = controller.ListAuthors();
+            IEnumerable<Author> Authors = controller.ListAuthors(searchKey);
             return View(Authors);
         }
 

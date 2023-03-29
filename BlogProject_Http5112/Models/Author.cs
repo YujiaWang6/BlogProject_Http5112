@@ -13,5 +13,13 @@ namespace BlogProject_Http5112.Models
         public string AuthorFname;
         public string AuthorLname;
         public string AuthorBio;
+        public string AuthorEmail;
+        public DateTime AuthorJoinDate;
+
+        //parameter-less constructor function
+        public Author()
+        {
+
+        }
     }
 }

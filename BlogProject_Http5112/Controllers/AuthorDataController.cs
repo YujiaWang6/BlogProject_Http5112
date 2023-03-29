@@ -58,12 +58,14 @@ namespace BlogProject_Http5112.Controllers
                 string AuthorFname = (string)ResultSet["authorfname"];
                 string AuthorLName = (string)ResultSet["authorlname"];
                 string AuthorBio = (string)ResultSet["authorbio"];
+                DateTime AuthorJoinDate = (DateTime)ResultSet["authorjoindate"];
 
                 Author NewAuthor = new Author();
                 NewAuthor.Authorid = AuthorId; 
                 NewAuthor.AuthorFname = AuthorFname;
                 NewAuthor.AuthorLname = AuthorLName;
                 NewAuthor.AuthorBio = AuthorBio;
+                NewAuthor.AuthorJoinDate = AuthorJoinDate;
 
 
                 //add the author name to the list
@@ -107,17 +109,69 @@ namespace BlogProject_Http5112.Controllers
                 string AuthorFname = (string)ResultSet["authorfname"];
                 string AuthorLName = (string)ResultSet["authorlname"];
                 string AuthorBio = (string)ResultSet["authorbio"];
+                DateTime AuthorJoinDate = (DateTime)ResultSet["authorjoindate"];
 
 
                 NewAuthor.Authorid = AuthorId;
                 NewAuthor.AuthorFname = AuthorFname;
                 NewAuthor.AuthorLname = AuthorLName;
                 NewAuthor.AuthorBio = AuthorBio;
+                NewAuthor.AuthorJoinDate = AuthorJoinDate;
             }
 
             Conn.Close();
 
             return NewAuthor;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <example>POST : /api/AuthorData/DeleteAuthor/3</example>
+        [HttpPost]
+        public void DeleteAuthor(int id)
+        {
+
+            MySqlConnection Conn = Blog.AccessDatabase();
+
+            Conn.Open();
+
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            cmd.CommandText = "Delete from authors where authorid=@id";
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+
+        }
+
+
+        [HttpPost]
+        public void AddAuthor([FromBody]Author NewAuthor)
+        {
+            MySqlConnection Conn = Blog.AccessDatabase();
+
+            Conn.Open();
+
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            cmd.CommandText = "Insert into authors (authorfname, authorlname, authorbio, authorjoindate, authoremail) VALUES(@AuthorFname,@AuthorLname,@AuthorBio, CURRENT_DATE(),@AuthorEmail)";
+            cmd.Parameters.AddWithValue("@AuthorFname", NewAuthor.AuthorFname);
+            cmd.Parameters.AddWithValue("@AuthorLname", NewAuthor.AuthorLname);
+            cmd.Parameters.AddWithValue("@AuthorBio", NewAuthor.AuthorBio);
+            cmd.Parameters.AddWithValue("@AuthorEmail", NewAuthor.AuthorEmail);
+
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+
+
         }
 
     }

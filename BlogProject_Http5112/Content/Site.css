@@ -16,8 +16,24 @@ textarea {
     max-width: 280px;
 }
 
+#navlink {
+    float: left;
+    color: indianred;
+}
+
+#dellink {
+    float: right;
+
+}
+
+nav {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
     background-color: #777;
     border-color: #fff
 }
+

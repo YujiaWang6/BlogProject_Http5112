@@ -109,6 +109,7 @@ namespace BlogProject_Http5112.Controllers
                 string AuthorFname = (string)ResultSet["authorfname"];
                 string AuthorLName = (string)ResultSet["authorlname"];
                 string AuthorBio = (string)ResultSet["authorbio"];
+                string AuthorEmail = (string)ResultSet["authoremail"];
                 DateTime AuthorJoinDate = (DateTime)ResultSet["authorjoindate"];
 
 
@@ -117,6 +118,7 @@ namespace BlogProject_Http5112.Controllers
                 NewAuthor.AuthorLname = AuthorLName;
                 NewAuthor.AuthorBio = AuthorBio;
                 NewAuthor.AuthorJoinDate = AuthorJoinDate;
+                NewAuthor.AuthorEmail = AuthorEmail;    
             }
 
             Conn.Close();
@@ -173,6 +175,34 @@ namespace BlogProject_Http5112.Controllers
 
 
         }
+
+
+
+        [HttpPost]
+        public void UpdateAuthor(int id, [FromBody]Author AuthorInfo)
+        {
+            MySqlConnection Conn = Blog.AccessDatabase();
+
+            Conn.Open();
+
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            cmd.CommandText = "Update authors set authorfname=@AuthorFname, authorlname=@AuthorLname, authorbio=@AuthorBio, authoremail=@AuthorEmail where authorid = @Authorid";
+            cmd.Parameters.AddWithValue("@AuthorFname", AuthorInfo.AuthorFname);
+            cmd.Parameters.AddWithValue("@AuthorLname", AuthorInfo.AuthorLname);
+            cmd.Parameters.AddWithValue("@AuthorBio", AuthorInfo.AuthorBio);
+            cmd.Parameters.AddWithValue("@AuthorEmail", AuthorInfo.AuthorEmail);
+            cmd.Parameters.AddWithValue("@Authorid", id);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
+        }
+
+
+
+
 
     }
 }

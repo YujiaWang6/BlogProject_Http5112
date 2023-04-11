@@ -1,0 +1,36 @@
+﻿@model BlogProject_Http5112.Models.Author
+@{
+    ViewBag.Title = "Update";
+}
+
+
+
+
+<div>
+    <nav>
+        <a href="/Author/Show/@Model.Authorid">Back</a>
+    </nav>
+</div>
+<h2>Update Author</h2>
+
+<form method="POST" action="/Author/Update/@Model.Authorid">
+    <div>
+        <label for="AuthorFname">First Name:</label>
+        <input type="text" name="AuthorFname" id="AuthorFname" value="@Model.AuthorFname"/>
+    </div>
+    <div>
+        <label for="AuthorLname">Last Name:</label>
+        <input type="text" name="AuthorLname" id="AuthorLname" value="@Model.AuthorLname"/>
+    </div>
+    <div>
+        <label for="AuthorBio">Biography:</label>
+        <textarea name="AuthorBio" id="AuthorBio">@Model.AuthorBio</textarea>
+    </div>
+    <div>
+        <label for="AuthorEmail">Email:</label>
+        <input type="text" name="AuthorEmail" id="AuthorEmail" value="@Model.AuthorEmail"></input>
+    </div>
+    <div>
+        <button type="submit">Update Author</button>
+    </div>
+</form>
